@@ -1,32 +1,39 @@
-import { assert } from 'chai';
+import { expect } from 'chai';
 import Trie from '../lib/Trie';
 import Node from '../lib/Node';
+import fs from 'fs';
+
+const text = "/usr/share/dict/words"
+const dictionary = fs.readFileSync(text).toString().trim().split('\n')
 
 
-describe('trie', function() {
+describe('trie', () => {
+  let trie;
 
-  it('should instatiate trie', function () {
-    let trie = new Trie();
+  beforeEach(() => {
+    trie = new Trie();
   });
 
-  it ('should increase count', function () { 
-    let trie = new Trie();
-    assert.equal(trie.count, 0);
+  it ('should increase count', () => { 
+    expect(trie.count).to.equal(0);
     trie.insert('word');
-    assert.equal(trie.count, 1);
+    expect(trie.count).to.equal(1);
     console.log(JSON.stringify(trie, null, 4))
   });
 
-  it('should start with a word count of zero', function () {
-    let trie = new Trie();
-    assert(trie.count).to.equal(0);
+  it('should start with a word count of zero', () => {
+    expect(trie.count).to.equal(0);
   });
 });
 
-describe('insert', function () {
+describe('insert', () => {
+  let trie;
+
+  beforeEach(() => {
+    trie = new Trie();
+  });
 
   it('should insert a new word', () => {
-    let trie = new Trie();
     trie.insert('dog');
     trie.insert('cat');
     trie.insert('doggo');
@@ -35,10 +42,14 @@ describe('insert', function () {
   });
 });
 
-describe('suggest', function () {
+describe('suggest', () => {
+  let trie;
+
+  beforeEach(() => {
+    trie = new Trie();
+  });
   
-  it('should take a prefix', function () {  
-    let trie = new Trie();
+  it('should take a prefix', () => {  
     trie.insert('dog');
     trie.insert('cat');
     trie.insert('doggo');
@@ -46,7 +57,7 @@ describe('suggest', function () {
     trie.insert('dog')
     console.log(trie.suggest('do'))
     console.log(JSON.stringify(trie, null, 4))
-    assert(true).to.equal(true);
+    expect(true).to.equal(true);
   });
 });
 
