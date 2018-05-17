@@ -14,15 +14,15 @@ describe('trie', () => {
     trie = new Trie();
   });
 
-  it ('should increase count', () => { 
+  it('should start with a word count of zero', () => {
+    expect(trie.count).to.equal(0);
+  });
+
+  it('should increase count', () => { 
     expect(trie.count).to.equal(0);
     trie.insert('word');
     expect(trie.count).to.equal(1);
     console.log(JSON.stringify(trie, null, 4))
-  });
-
-  it('should start with a word count of zero', () => {
-    expect(trie.count).to.equal(0);
   });
 });
 
@@ -60,6 +60,27 @@ describe('suggest', () => {
     expect(true).to.equal(true);
   });
 });
+
+describe('populate', () => {
+  let trie;
+
+  beforeEach(() => {
+    trie = new Trie();
+  });
+
+  it ('should insert an array of words', () => {
+    let array = ['apple', 'banana', 'pear', 'grape']
+    trie.populate(array);
+    expect(trie.count).to.equal(4);
+   }); 
+
+  it('should populate with dictionary', () => {
+    trie.populate(dictionary);
+    let numberOfWords = trie.count;
+    expect(numberOfWords).to.equal(235886);
+  });
+});
+
 
 
 

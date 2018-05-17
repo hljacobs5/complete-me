@@ -14,7 +14,7 @@ describe('node', () => {
   });
 
   it('should have a children property start as an empty object', () => {
-    expect(node.children).to.equal( {} );
+    expect(node.children).to.deep.equal({});
   });  
 
   it('should have a completed property with default value of null', () => {
